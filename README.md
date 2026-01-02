@@ -1,0 +1,123 @@
+# STM32-LORA-Wireless-Messaging-System-with-Display
+STM32 + LoRA Text Transmission
+
+This repository contains the source code and documentation for a text send & receive system using STM32 microcontrollers and Ebyte 915 MHz UART LoRA modules. The system allows two STM32 boards to communicate wirelessly using simple UART functions without needing additional LoRA libraries. 
+micropeta.com
+
+## Overview
+
+Using two STM32 boards (e.g., Blue Pill or similar) and E220-900T22D LoRA modules, this project demonstrates bidirectional text transmission over long range (up to several hundred meters) via UART communication. 
+micropeta.com
+
+The LoRA modules are configured with default channel, address, and key settings — simplifying setup and enabling immediate transmission and reception. 
+micropeta.com
+
+```
+What’s Included
+├── /Core/Inc
+│    ├── fonts.h
+│    └── ssd1306.h
+├── /Core/Src
+│    ├── fonts.c
+│    └── ssd1306.c
+├── main.c
+├── .gitignore
+├── README.md
+└── STM32CubeIDE Project Files
+```
+
+Replace filenames/structure if your project differs.
+
+## Hardware Requirements
+Component	Quantity
+STM32 Microcontroller Board (e.g., STM32F103C8T6)	2
+Ebyte E220-900T22D LoRA UART Modules	2
+OLED Display (optional for debugging)	1
+Wires, Power Supply (3.3V)	As needed
+## Setup & Wiring
+
+Connect STM32 UART1 TX/RX to the LoRA module RX/TX respectively (cross-connected).
+
+Provide 3.3V VCC and GND to both the LoRA module and STM32 board.
+
+(Optional) Connect an OLED display via I2C for visual feedback.
+
+Ensure both LoRA modules are the same model and set for the same frequency/parameters. 
+micropeta.com
+
+## Software Requirements
+
+STM32CubeIDE
+
+Basic familiarity with STM32 HAL functions
+
+Understanding of UART transmit and receive functions
+
+## Key Project Features
+## LoRA Communication
+
+Uses simple UART functions:
+
+HAL_UART_Transmit();
+HAL_UART_Receive();
+
+
+No additional LoRA libraries required — full communication handled via UART. 
+micropeta.com
+
+## Encoding
+
+Received data is decoded from characters to integers for processing on the receiving STM32. 
+micropeta.com
+
+## OLED Display Output
+
+Optionally displays transmitted and received text on an SSD1306 OLED screen using the included fonts and driver. 
+micropeta.com
+
+## Code Snippet
+```
+Here’s the main communication loop:
+
+HAL_ADC_Start(&hadc1);
+HAL_ADC_PollForConversion(&hadc1,1000);
+readValue = HAL_ADC_GetValue(&hadc1);
+HAL_ADC_Stop(&hadc1);
+
+// Convert ADC value to char
+charValue = readValue / 65 + 32;
+singleChar[0] = charValue;
+
+// Display received text
+SSD1306_GotoXY(0, 0);
+SSD1306_Puts((char *)rxBuffer, &Font_11x18, 1);
+
+// Display current TX char
+SSD1306_GotoXY(53, 37);
+SSD1306_Puts((char *)singleChar, &Font_16x26, 1);
+SSD1306_UpdateScreen();
+HAL_Delay(50);
+
+
+Interrupt routine for UART reception:
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if (huart->Instance == USART1) {
+    if (rxData != 13) {
+      rxBuffer[rxIndex++] = rxData;
+    } else {
+      // Reset buffer once CR received
+      rxIndex = 0;
+      memset(rxBuffer, 0, sizeof(rxBuffer));
+    }
+    HAL_UART_Receive_IT(&huart1, &rxData, 1);
+  }
+}
+```
+# Notes & Tips
+
+The LoRA modules used (E220-900T22D) are rated up to 5 km LOS, though power and frequency regulations vary by region. Always check local radio regulations. 
+micropeta.com
+
+For in-house testing without antennas, be mindful that the modules can overheat due to RF power reflection; power cycling may be needed. 
