@@ -7,10 +7,9 @@ micropeta.com
 ## Overview
 
 Using two STM32 boards (e.g., Blue Pill or similar) and E220-900T22D LoRA modules, this project demonstrates bidirectional text transmission over long range (up to several hundred meters) via UART communication. 
-micropeta.com
+
 
 The LoRA modules are configured with default channel, address, and key settings — simplifying setup and enabling immediate transmission and reception. 
-micropeta.com
 
 ```
 What’s Included
@@ -56,7 +55,7 @@ Provide 3.3V VCC and GND to both the LoRA module and STM32 board.
 (Optional) Connect an OLED display via I2C for visual feedback.
 
 Ensure both LoRA modules are the same model and set for the same frequency/parameters. 
-micropeta.com
+
 
 ## STM32CubeIDE Settings
 1. ADC1 - IN2 (tick)
