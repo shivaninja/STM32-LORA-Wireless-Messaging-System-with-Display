@@ -39,6 +39,14 @@ OLED Display (optional for debugging)	1
 
 Wires, Power Supply (3.3V)	As needed
 
+## Software Requirements
+
+STM32CubeIDE
+
+Basic familiarity with STM32 HAL functions
+
+Understanding of UART transmit and receive functions
+
 ## Setup & Wiring
 
 Connect STM32 UART1 TX/RX to the LoRA module RX/TX respectively (cross-connected).
@@ -49,14 +57,6 @@ Provide 3.3V VCC and GND to both the LoRA module and STM32 board.
 
 Ensure both LoRA modules are the same model and set for the same frequency/parameters. 
 micropeta.com
-
-## Software Requirements
-
-STM32CubeIDE
-
-Basic familiarity with STM32 HAL functions
-
-Understanding of UART transmit and receive functions
 
 ## STM32CubeIDE Settings
 1. ADC1 - IN2 (tick)
