@@ -14,11 +14,11 @@ The LoRA modules are configured with default channel, address, and key settings 
 ```
 What’s Included
 |-- /Core/Inc
-│    |── fonts.h
-│    |── ssd1306.h
+│    |-- fonts.h
+│    |-- ssd1306.h
 |-- /Core/Src
-│    ├── fonts.c
-│    |── ssd1306.c
+│    |-- fonts.c
+│    |-- ssd1306.c
 |-- main.c
 |-- .gitignore
 |-- README.md
@@ -148,6 +148,101 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   }
 }
 ```
+# Additional code on top of STM32CubeIDE generated code
+```
+/* USER CODE BEGIN Includes */
+#include "fonts.h"
+#include "ssd1306.h"
+/* USER CODE END Includes */
+
+/* USER CODE BEGIN PV */
+uint32_t previousTick = 0;
+uint16_t readValue;
+uint8_t charValue;
+uint8_t singleChar[1] = {0};
+uint8_t dataBuffer[20] = {0};
+uint8_t dataIndex = 0;
+uint8_t txBuffer[20] = {0};
+uint8_t rxBuffer[20] = {0};
+uint8_t rxIndex = 0;
+uint8_t rxData;
+/* USER CODE END PV */
+
+  /* USER CODE BEGIN 2 */
+  SSD1306_Init();
+  HAL_UART_Receive_IT(&huart1,&rxData,1);
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+    HAL_ADC_Start(&hadc1);
+    HAL_ADC_PollForConversion(&hadc1,1000);
+    readValue = HAL_ADC_GetValue(&hadc1);
+    HAL_ADC_Stop(&hadc1);
+    // Convert readValue 0-4095 to charValue 32 to 95
+    charValue = readValue/65 +32;
+    singleChar[0]=charValue;
+    SSD1306_GotoXY (0, 0);
+    SSD1306_Puts ((char *)rxBuffer, &Font_11x18, 1);
+    SSD1306_GotoXY (0, 20);
+    SSD1306_Puts ((char *)dataBuffer, &Font_11x18, 1);
+    SSD1306_GotoXY (53,37);
+    SSD1306_Puts ((char *)singleChar, &Font_16x26, 1);
+    SSD1306_UpdateScreen();
+    HAL_Delay(50);
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+
+/* USER CODE BEGIN 4 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if (GPIO_Pin == GPIO_PIN_3 && (HAL_GetTick() - previousTick > 600))
+  {
+    txBuffer[dataIndex]=charValue;
+    dataBuffer[dataIndex++]=charValue;
+    txBuffer[dataIndex]=13;
+    HAL_UART_Transmit_IT(&huart1,(uint8_t *)txBuffer,dataIndex+1);
+    previousTick = HAL_GetTick();
+  }
+  else if (GPIO_Pin == GPIO_PIN_1 && (HAL_GetTick() - previousTick > 600))
+  {
+    dataIndex--;
+    dataBuffer[dataIndex]=0;
+    txBuffer[dataIndex]=13;
+    HAL_UART_Transmit_IT(&huart1,(uint8_t *)txBuffer,dataIndex+1);
+    SSD1306_Clear();
+    previousTick = HAL_GetTick();
+  }
+}
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart->Instance==USART1)
+  {
+    // if the character received is other than 'enter' ascii13, save the data in buffer
+    if(rxData!=13)
+    {
+      if(rxIndex==0)
+      {
+        memset(rxBuffer,0,sizeof(rxBuffer));
+      }
+      rxBuffer[rxIndex++]=rxData;
+    }
+    else
+    {
+      SSD1306_Clear();
+      rxIndex=0;
+    }
+    HAL_UART_Receive_IT(&huart1,&rxData,1); // Enabling interrupt receive again
+  }
+}
+/* USER CODE END 4 */
+```
+
 # Notes & Tips
 
 The LoRA modules used (E220-900T22D) are rated up to 5 km LOS, though power and frequency regulations vary by region. Always check local radio regulations. 
