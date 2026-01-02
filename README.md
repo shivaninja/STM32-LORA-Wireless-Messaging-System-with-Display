@@ -1,8 +1,8 @@
 # STM32-LORA-Wireless-Messaging-System-with-Display
-STM32 + LoRA Text Transmission
+###STM32 + LoRA Text Transmission
 
 This repository contains the source code and documentation for a text send & receive system using STM32 microcontrollers and Ebyte 915 MHz UART LoRA modules. The system allows two STM32 boards to communicate wirelessly using simple UART functions without needing additional LoRA libraries. 
-micropeta.com
+I have used two sets of STM32 and Ebyte 915MHz UART LORA Module to transmit and receive data between long distance. This LORA module does not need library. We can simply use HAL_UART_Transmit() and HAL_UART_Receive() to transmit and receive. When receiving we need to decode the data from character to integer. Manufacturer sets Channel, Address and key to default value so no need to change these until we complete basic circuit and do a distance testing. It will work out of the box. Make sure to use both modules with same part number. E220-900T22D module is rated for 5km distance. Because I used low voltage of 3.3V VCC, I was able to get about 500m (half km) easily without line of sight using about 25mW power.
 
 ## Overview
 
@@ -85,7 +85,6 @@ Ensure both LoRA modules are the same model and set for the same frequency/param
 13. For I2C select I2C
 
 14. Configuration --> Parameter Settings
-
     
 ## Key Project Features
 ## LoRA Communication
