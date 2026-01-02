@@ -13,16 +13,16 @@ The LoRA modules are configured with default channel, address, and key settings 
 
 ```
 What’s Included
-|__ /Core/Inc
+|-- /Core/Inc
 │    |── fonts.h
 │    |── ssd1306.h
-|__ /Core/Src
+|-- /Core/Src
 │    ├── fonts.c
 │    |── ssd1306.c
-|__ main.c
-|__ .gitignore
-|__ README.md
-|__ STM32CubeIDE Project Files
+|-- main.c
+|-- .gitignore
+|-- README.md
+|-- STM32CubeIDE Project Files
 ```
 
 Replace filenames/structure if your project differs.
