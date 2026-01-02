@@ -87,7 +87,7 @@ Ensure both LoRA modules are the same model and set for the same frequency/param
 14. Configuration --> Parameter Settings
     
 ## Key Project Features
-## LoRA Communication
+### LoRA Communication
 
 Uses simple UART functions:
 
@@ -97,11 +97,11 @@ HAL_UART_Receive();
 
 No additional LoRA libraries required — full communication handled via UART. 
 
-## Encoding
+### Encoding
 
 Received data is decoded from characters to integers for processing on the receiving STM32. 
 
-## OLED Display Output
+### OLED Display Output
 
 Optionally displays transmitted and received text on an SSD1306 OLED screen using the included fonts and driver. 
 
