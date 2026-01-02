@@ -36,7 +36,9 @@ Ebyte E220-900T22D LoRA UART Modules	2
 
 OLED Display (optional for debugging)	1
 
-Wires, Power Supply (3.3V)	As needed
+Wires, Power Supply (3.3V)	
+
+Potentiometer
 
 ## Software Requirements
 
