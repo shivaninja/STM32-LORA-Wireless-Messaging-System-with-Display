@@ -46,6 +46,10 @@ Basic familiarity with STM32 HAL functions
 
 Understanding of UART transmit and receive functions
 
+# Wiring Dirgram
+![Wiring Diagram](path/to/your/image.png)
+
+
 ## Setup & Wiring
 
 Connect STM32 UART1 TX/RX to the LoRA module RX/TX respectively (cross-connected).
