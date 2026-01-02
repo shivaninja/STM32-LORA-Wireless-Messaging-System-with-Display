@@ -12,7 +12,7 @@ I have used two sets of STM32 and Ebyte 915MHz UART LORA Module to transmit and 
 The LoRA modules are configured with default channel, address, and key settings — simplifying setup and enabling immediate transmission and reception. 
 
 ```
-What’s Included
+What’s Included In File System
 |-- /Core/Inc
 │    |-- fonts.h
 │    |-- ssd1306.h
