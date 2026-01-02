@@ -1,28 +1,28 @@
 # STM32-LORA-Wireless-Messaging-System-with-Display
 STM32 + LoRA Text Transmission
 
-This repository contains the source code and documentation for a text send & receive system using STM32 microcontrollers and Ebyte 915 MHz UART LoRA modules. The system allows two STM32 boards to communicate wirelessly using simple UART functions without needing additional LoRA libraries. 
-I have used two sets of STM32 and Ebyte 915MHz UART LORA Module to transmit and receive data between long distance. This LORA module does not need library. We can simply use HAL_UART_Transmit() and HAL_UART_Receive() to transmit and receive. When receiving we need to decode the data from character to integer. Manufacturer sets Channel, Address and key to default value so no need to change these until we complete basic circuit and do a distance testing. It will work out of the box. Make sure to use both modules with same part number. E220-900T22D module is rated for 5km distance. Because I used low voltage of 3.3V VCC, I was able to get about 500m (half km) easily without line of sight using about 25mW power.
-
+This repository contains the source code and documentation for a text send & receive system using STM32 microcontrollers and Ebyte 915 MHz UART LoRA modules. 
 ## Overview
 
 Using two STM32 boards (e.g., Blue Pill or similar) and E220-900T22D LoRA modules, this project demonstrates bidirectional text transmission over long range (up to several hundred meters) via UART communication. 
+The system allows two STM32 boards to communicate wirelessly using simple UART functions without needing additional LoRA libraries. 
+I have used two sets of STM32 and Ebyte 915MHz UART LORA Module to transmit and receive data between long distance. This LORA module does not need library. We can simply use HAL_UART_Transmit() and HAL_UART_Receive() to transmit and receive. When receiving we need to decode the data from character to integer. Manufacturer sets Channel, Address and key to default value so no need to change these until we complete basic circuit and do a distance testing. It will work out of the box. Make sure to use both modules with same part number. E220-900T22D module is rated for 5km distance. Because I used low voltage of 3.3V VCC, I was able to get about 500m (half km) easily without line of sight using about 25mW power.
 
 
 The LoRA modules are configured with default channel, address, and key settings — simplifying setup and enabling immediate transmission and reception. 
 
 ```
 What’s Included
-├── /Core/Inc
-│    ├── fonts.h
-│    └── ssd1306.h
-├── /Core/Src
+|__ /Core/Inc
+│    |── fonts.h
+│    |── ssd1306.h
+|__ /Core/Src
 │    ├── fonts.c
-│    └── ssd1306.c
-├── main.c
-├── .gitignore
-├── README.md
-└── STM32CubeIDE Project Files
+│    |── ssd1306.c
+|__ main.c
+|__ .gitignore
+|__ README.md
+|__ STM32CubeIDE Project Files
 ```
 
 Replace filenames/structure if your project differs.
