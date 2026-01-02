@@ -47,7 +47,7 @@ Basic familiarity with STM32 HAL functions
 Understanding of UART transmit and receive functions
 
 # Wiring Dirgram
-![Wiring Diagram](path/to/your/image.png)
+![Wiring Diagram](https://github.com/shivaninja/STM32-LORA-Wireless-Messaging-System-with-Display/blob/6638baeed50891be877faf240c0e8a38ccb10906/Picture/Picture.jpg)
 
 
 ## Setup & Wiring
