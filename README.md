@@ -72,13 +72,13 @@ Ensure both LoRA modules are the same model and set for the same frequency/param
 
 4. Set PA3 to GPIO_EXTI3
 
-5. Click NVIC → EXTI line1 interrupt → Enabled (Tick)
+5. Click NVIC --> EXTI line1 interrupt → Enabled (Tick)
 
-6. Click NVIC → EXTI line3 interrupt → Enabled (Tick)
+6. Click NVIC --> EXTI line3 interrupt → Enabled (Tick)
 
-7. Click GPIO → Select PA1 → GPIO Pull-up/Pull-down → Pull-down
+7. Click GPIO --> Select PA1 → GPIO Pull-up/Pull-down → Pull-down
 
-8. Click GPIO → Select PA3 → GPIO Pull-up/Pull-down → Pull-down
+8. Click GPIO --> Select PA3 → GPIO Pull-up/Pull-down → Pull-down
 
 9. Enable USART1 asynchronous
 
