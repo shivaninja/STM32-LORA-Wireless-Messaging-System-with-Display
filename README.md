@@ -30,10 +30,15 @@ Replace filenames/structure if your project differs.
 
 ## Hardware Requirements
 Component	Quantity
+
 STM32 Microcontroller Board (e.g., STM32F103C8T6)	2
+
 Ebyte E220-900T22D LoRA UART Modules	2
+
 OLED Display (optional for debugging)	1
+
 Wires, Power Supply (3.3V)	As needed
+
 ## Setup & Wiring
 
 Connect STM32 UART1 TX/RX to the LoRA module RX/TX respectively (cross-connected).
@@ -53,6 +58,36 @@ Basic familiarity with STM32 HAL functions
 
 Understanding of UART transmit and receive functions
 
+## STM32CubeIDE Settings
+1. ADC1 - IN2 (tick)
+
+2. Parameter Settings --> ADC Settings --> Continuous Conversion Mode (Enabled)
+
+3. Set PA1 to GPIO_EXTI1
+
+4. Set PA3 to GPIO_EXTI3
+
+5. Click NVIC → EXTI line1 interrupt → Enabled (Tick)
+
+6. Click NVIC → EXTI line3 interrupt → Enabled (Tick)
+
+7. Click GPIO → Select PA1 → GPIO Pull-up/Pull-down → Pull-down
+
+8. Click GPIO → Select PA3 → GPIO Pull-up/Pull-down → Pull-down
+
+9. Enable USART1 asynchronous
+
+10. Parameter Settings --> Basic Parameters --> Baud rate 9600
+
+11. NVIC Settings --> USART1 global interrupt --> (Tick)
+
+12. Click connectivity --> Click I2C1
+
+13. For I2C select I2C
+
+14. Configuration --> Parameter Settings
+
+    
 ## Key Project Features
 ## LoRA Communication
 
