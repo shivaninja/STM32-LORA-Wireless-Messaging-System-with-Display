@@ -96,17 +96,14 @@ HAL_UART_Receive();
 
 
 No additional LoRA libraries required — full communication handled via UART. 
-micropeta.com
 
 ## Encoding
 
 Received data is decoded from characters to integers for processing on the receiving STM32. 
-micropeta.com
 
 ## OLED Display Output
 
 Optionally displays transmitted and received text on an SSD1306 OLED screen using the included fonts and driver. 
-micropeta.com
 
 ## Code Snippet
 ```
@@ -246,6 +243,5 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 # Notes & Tips
 
 The LoRA modules used (E220-900T22D) are rated up to 5 km LOS, though power and frequency regulations vary by region. Always check local radio regulations. 
-micropeta.com
 
 For in-house testing without antennas, be mindful that the modules can overheat due to RF power reflection; power cycling may be needed. 
